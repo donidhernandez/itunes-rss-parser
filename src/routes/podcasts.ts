@@ -7,9 +7,8 @@ router.get('/rss-parser', async (req, res) => {
   const { url } = req.query;
   res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
 
-  res.send('Hi');
-  // const response = await podcastRssParser(url as string);
-  // res.json(response);
+  const response = await podcastRssParser(url as string);
+  res.json(response);
 });
 
 export default router;

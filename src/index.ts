@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import router from './routes/podcasts';
+import podcastRssParser from './services/podcast-rss-parser';
 
 const app = express();
 
@@ -15,11 +15,12 @@ app.use(cors(options));
 
 const PORT = 4000;
 
-app.get('/api', (_req, res) => {
+app.get('/api', async (req, res) => {
+  const { url } = req.query;
+  const response = await podcastRssParser(url as string);
+  res.json(response);
   res.send('Successfully connected to the API server');
 });
-
-app.use('/podcasts', router);
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
