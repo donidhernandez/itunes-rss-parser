@@ -19,7 +19,6 @@ app.get('/api', async (req, res) => {
   const { url } = req.query;
   const response = await podcastRssParser(url as string);
   res.json(response);
-  res.send('Successfully connected to the API server');
 });
 
 app.listen(PORT, () => {
