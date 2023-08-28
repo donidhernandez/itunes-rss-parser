@@ -19,7 +19,7 @@ app.get('/api', (_req, res) => {
   res.send('Successfully connected to the API server');
 });
 
-app.use('/api', router);
+app.use('/podcasts', router);
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
