@@ -5,11 +5,13 @@ import router from './routes/podcasts';
 const app = express();
 
 app.use(express.json());
-app.use(
-  cors({
-    origin: 'http://localhost:3000',
-  })
-);
+
+const allowedOrigins = ['http://localhost:3000'];
+const options: cors.CorsOptions = {
+  origin: allowedOrigins,
+};
+
+app.use(cors(options));
 
 const PORT = 4000;
 
