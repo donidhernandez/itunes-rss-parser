@@ -6,17 +6,23 @@ const app = express();
 
 app.use(express.json());
 
-const options: cors.CorsOptions = {
-  origin: '*',
-  methods: 'GET',
+const whitelist = ['http://localhost:3000'];
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
 };
-
-app.use(cors(options));
+app.use(cors(corsOptions));
 
 const PORT = 4000;
 
 app.options('*', cors());
-app.get('/', cors(), async (req, res) => {
+app.get('/api', cors(), async (req, res) => {
   const { url } = req.query;
   const parser = new Parser();
   const feed = await parser.parseURL(url as string);
