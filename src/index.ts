@@ -21,8 +21,7 @@ app.use(cors(corsOptions));
 
 const PORT = 4000;
 
-app.options('*', cors());
-app.get('/api', cors(), async (req, res) => {
+app.get('/api', async (req, res) => {
   const { url } = req.query;
   const parser = new Parser();
   const feed = await parser.parseURL(url as string);
