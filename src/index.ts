@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import podcastRssParser from './services/podcast-rss-parser';
+import Parser from 'rss-parser';
 
 const app = express();
 
@@ -17,8 +17,10 @@ const PORT = 4000;
 
 app.get('/api', async (req, res) => {
   const { url } = req.query;
-  const response = await podcastRssParser(url as string);
-  res.json(response);
+  const parser = new Parser();
+  const feed = await parser.parseURL(url as string);
+
+  res.json(feed);
 });
 
 app.listen(PORT, () => {
