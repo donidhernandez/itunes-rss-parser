@@ -3,11 +3,11 @@ import podcastRssParser from '../services/podcast-rss-parser';
 
 const router = express.Router();
 
-router.post('/rss-parser', async (req, res) => {
-  const { url } = req.body;
+router.get('/rss-parser', async (req, res) => {
+  const { url } = req.query;
   res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
 
-  const response = await podcastRssParser(url);
+  const response = await podcastRssParser(url as string);
   res.json(response);
 });
 
