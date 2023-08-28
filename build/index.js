@@ -17,19 +17,18 @@ const cors_1 = __importDefault(require("cors"));
 const rss_parser_1 = __importDefault(require("rss-parser"));
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
-const whitelist = ['http://localhost:3000'];
-const corsOptions = {
-    origin: function (origin, callback) {
-        if (!origin || whitelist.indexOf(origin) !== -1) {
-            callback(null, true);
-        }
-        else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
-    credentials: true,
-};
-app.use((0, cors_1.default)(corsOptions));
+// const whitelist = ['http://localhost:3000'];
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     if (!origin || whitelist.indexOf(origin) !== -1) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('Not allowed by CORS'));
+//     }
+//   },
+//   credentials: true,
+// };
+app.use((0, cors_1.default)());
 const PORT = 4000;
 app.get('/api', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { url } = req.query;
